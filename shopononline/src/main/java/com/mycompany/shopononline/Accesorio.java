@@ -1,6 +1,6 @@
 package com.mycompany.shopononline;
 
-public class Accesorio extends Producto{
+public class Accesorio extends Producto implements Arancel{
     
     private double peso;
     private String metal;
@@ -10,8 +10,11 @@ public class Accesorio extends Producto{
         this.peso = peso;
         this.metal = metal;
         this.getPrecio();
+        this.arancelAduanero();
+        this.arancelTransporte();
         
     }
+    
     @Override
     public double getPrecio() {
         if (this.metal.equals("oro")) {
@@ -23,14 +26,34 @@ public class Accesorio extends Producto{
         if (this.metal.equals("acero")) {
             this.precio = this.precio + this.peso * 1000;
         }
+        return this.precio;
+    }
+ 
+      @Override
+    public double arancelAduanero() {
+        this.precio += this.precio * 0.10;
+        return this.precio;
+    }
+    @Override
+    public double arancelTransporte(){
+        this.precio += this.precio * 0.02;
         return precio;
     }
+    
+    @Override
     public String toString() {
         return this.desc + "........ $ " + this.precio + "(Bijouterie)";
     }
+    @Override
     public String getDesc() {
         return desc;
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
     public int getCodigo() {
         return codigo;
     }
